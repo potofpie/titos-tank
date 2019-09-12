@@ -1,7 +1,7 @@
 # Tito's Tank
 This is a web app that monitors my fish tank.  As you could probably deduce my fish is names Tito.
 
-### Framework/Languages
+### Languages
 =========================
   - Python 3
   - Node.js
