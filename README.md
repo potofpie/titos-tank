@@ -5,9 +5,7 @@ This is a web app that monitors my fish tank.  As you could probably deduce my f
 =========================
   - Python 3
   - Node.js
-  - React.js
   - MicroPython
-  - Flask
 
 ### Hardware
 ===============
