@@ -17,6 +17,11 @@
 
 }
 
+.App-message-text{
+  color: "‎#FF0000";
+  padding-bottom: 5px; 
+}
+
 .App-card-time{
   padding: 10px;
   font-size: 12px;

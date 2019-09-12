@@ -5,6 +5,9 @@ import LineChart from 'react-linechart';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import AppBar from '@material-ui/core/AppBar';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import ErrorIcon from "@material-ui/icons/Error";
 
 //CSS
 import './App.css';
@@ -25,20 +28,36 @@ class App extends Component {
     this.state = {
       data: {
         level : {
-          val: 'null'
+          val: 'null',
+          time: 'null'
         },
         ph : {
-          val: 'null'
+          val: 'null',
+          time: 'null'
         },
         temp : {
-          val: 'null'
+          val: 'null',
+          time: 'null'
         }
       },
       tempColor: '#222',
       levelColor: '#222',
       phColor: '#222',
+      apiUP: false
     };
-    this.setLastestVals()
+  }
+
+  apiIsUP = () => {
+    fetch('http://127.0.0.1:5000/')
+    .then(response => {
+      console.log(response.status)
+      if(response.status ===200){
+        this.setState({apiUP: true})
+      }
+      else{
+        this.setState({apiUP: false})
+      }
+    })
   }
 
   setLastestVals = () => {
@@ -56,9 +75,20 @@ class App extends Component {
   
   }
 
+  apiErrorMessage = () => {
+    if(this.state.apiUP === false){
+      return    ( 
+                      <div className="App-message-text" >
+                          Could not reach API
+                      </div>
+                )
+    }
+  }
+
   componentDidMount() {
+    this.apiIsUP()
     this.interval = setInterval(this.setLastestVals , 1000)
-      
+    
   }
 
 
@@ -74,10 +104,10 @@ class App extends Component {
       
         
         <div className="App-header">
+          {this.apiErrorMessage()}
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Tito's Tank </h2>
         </div>
-        
         <Container className="App-page" maxWidth="md">
           <GaugeCard title="PH" icon={PH} color={this.state.phColor} val={this.state.data.ph.val} time={this.state.data.ph.time} min={0} max={14}/>
           <GaugeCard title="WaterLevel" icon={WaterLevel} color={this.state.levelColor} val={this.state.data.level.val} time={this.state.data.level.time} min={0} max={375}/>
