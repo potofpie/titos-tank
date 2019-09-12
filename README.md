@@ -15,6 +15,7 @@ This is a web app that monitors my fish tank.  As you could probably deduce my f
 
 ### Todos
  - Write sensor code
+ - Impediment live graph of reading in last 24 hours
  
 ### References
  - https://techtutorialsx.com/2017/09/01/esp32-micropython-http-webserver-with-picoweb/
