@@ -17,7 +17,7 @@ This is a web app that monitors my fish tank.  As you could probably deduce my f
 ===============
  - Write sensor code
  - Improve API down message
- - Make file to upload code to baord
+ - Makefile to upload code to baord
  - Remove middle layer API and fix CORS problem with ESP32 API
  - Enhance live graph
  - Add tabbed graphs for all reading types
