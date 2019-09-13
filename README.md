@@ -20,6 +20,7 @@ This is a web app that monitors my fish tank.  As you could probably deduce my f
  - Make file to upload code to baord
  - Remove middle layer API and fix CORS problem with ESP32 API
  - Enhance live graph
+ - Add tabbed graphs for all reading types
  
 ### References
 ===============
