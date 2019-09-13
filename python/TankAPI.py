@@ -7,7 +7,7 @@ import datetime
 
 
 from flask import Flask
-maxLength = 100
+maxLength = 25
 app = Flask(__name__)
 readingList = []
 main()

@@ -37,7 +37,11 @@ class App extends Component {
       tempColor: '#222',
       levelColor: '#222',
       phColor: '#222',
-      apiUP: false
+      apiUP: false,
+      graph: [{									
+        color: "black", 
+        points: [{x: 0, y: 72}, {x: 4, y: 72}, {x: 100, y: 72}] 
+      }]
     };
   }
 
@@ -69,6 +73,25 @@ class App extends Component {
   
   }
 
+  setHistoricalValsTest = () => {
+    var readings = []
+    fetch('http://127.0.0.1:5000/all')
+    .then(response => response.json())
+    .then(data => data.map((read, index) => {
+      console.log(read.temp.val)
+      console.log("index" + index)
+      readings.push({x: index, y: read.temp.val})
+    } ))
+
+    this.setState(
+      {graph: [{									
+        color: "black", 
+        //points: [{x: 0, y: 72},{x: this.state.graph[0].points[1].x+10, y: 72},{x: 100, y: 72}]
+        points: readings
+      }]}
+    )
+  }
+
   apiErrorMessage = () => {
     if(this.state.apiUP === false){
       return    ( 
@@ -81,12 +104,19 @@ class App extends Component {
 
   componentDidMount() {
     this.apiIsUP()
-    this.interval = setInterval(this.setLastestVals , 1000)
+    this.interval = setInterval(this.setLastestVals , 5000)
+    this.interval1 = setInterval(this.setHistoricalValsTest , 5000)
     
   }
 
 
   render() {
+//    const data = [
+//      {									
+//          color: "black", 
+//          points: [{x: 0, y: 72}, {x: 10, y: 74},  {x:20, y: 78}, {x: 30, y: 80}, {x: 40, y: 81}, {x: 50, y: 75}, {x: 60, y: 74}, {x: 70, y: 76}, {x: 80, y: 81}, {x: 90, y: 79}, {x: 100, y: 71}] 
+//      }
+//  ];
     return (
       <div className="App">
       
@@ -102,7 +132,7 @@ class App extends Component {
           <GaugeCard title="Temperature" icon={Temperature} color={this.state.tempColor} val={this.state.data.temp.val} time={this.state.data.temp.time} min={60} max={80}/>
         </Container>
         <Container maxWidth="md">
-          <GraphCard/>
+          <GraphCard graph={this.state.graph}/>
         </Container>
   
 
