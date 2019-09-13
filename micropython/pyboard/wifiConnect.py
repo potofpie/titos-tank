@@ -8,15 +8,18 @@ def connect():
  
   if station.isconnected() == True:
       print("Already connected")
-      print("IP: " + str(station.ifconfig()))
+      print("ssid: " + ssid)
+      print("IP: " + str(station.ifconfig()[0]))
       return
  
   station.active(True)
+  print("About to connect to: " + ssid)
   station.connect(ssid, password)
  
   while station.isconnected() == False:
       pass
  
   print("Connection successful")
-  print(station.ifconfig())
+  print("ssid: " + ssid)
+  print("IP: " + str(station.ifconfig()[0]))
 
