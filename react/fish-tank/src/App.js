@@ -48,7 +48,7 @@ class App extends Component {
   apiIsUP = () => {
     fetch('http://127.0.0.1:5000/')
     .then(response => {
-      console.log(response.status)
+      //console.log(response.status)
       if(response.status ===200){
         this.setState({apiUP: true})
       }
@@ -78,8 +78,8 @@ class App extends Component {
     fetch('http://127.0.0.1:5000/all')
     .then(response => response.json())
     .then(data => data.map((read, index) => {
-      console.log(read.temp.val)
-      console.log("index" + index)
+      //console.log(read.temp.val)
+      //console.log("index" + index)
       readings.push({x: index, y: read.temp.val})
     } ))
 
@@ -111,12 +111,6 @@ class App extends Component {
 
 
   render() {
-//    const data = [
-//      {									
-//          color: "black", 
-//          points: [{x: 0, y: 72}, {x: 10, y: 74},  {x:20, y: 78}, {x: 30, y: 80}, {x: 40, y: 81}, {x: 50, y: 75}, {x: 60, y: 74}, {x: 70, y: 76}, {x: 80, y: 81}, {x: 90, y: 79}, {x: 100, y: 71}] 
-//      }
-//  ];
     return (
       <div className="App">
       
@@ -127,9 +121,9 @@ class App extends Component {
           <h2>Tito's Tank </h2>
         </div>
         <Container className="App-page" maxWidth="md">
-          <GaugeCard title="PH" icon={PH} color={this.state.phColor} val={this.state.data.ph.val} time={this.state.data.ph.time} min={0} max={14}/>
-          <GaugeCard title="WaterLevel" icon={WaterLevel} color={this.state.levelColor} val={this.state.data.level.val} time={this.state.data.level.time} min={0} max={375}/>
           <GaugeCard title="Temperature" icon={Temperature} color={this.state.tempColor} val={this.state.data.temp.val} time={this.state.data.temp.time} min={60} max={80}/>
+          <GaugeCard title="WaterLevel" icon={WaterLevel} color={this.state.levelColor} val={this.state.data.level.val} time={this.state.data.level.time} min={0} max={375}/>
+          <GaugeCard title="PH" icon={PH} color={this.state.phColor} val={this.state.data.ph.val} time={this.state.data.ph.time} min={0} max={14}/>
         </Container>
         <Container maxWidth="md">
           <GraphCard graph={this.state.graph}/>
